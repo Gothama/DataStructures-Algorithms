@@ -1,0 +1,74 @@
+#include <iostream>
+
+
+using namespace std;
+struct node{
+	int data;
+	node* next;
+};
+
+
+class StackLinkedList{
+	node* head = NULL;
+	node* tail = NULL;
+	node* t;
+	int size =0;
+	
+	public:
+		void push(int data){
+			t = new node;
+			t->data = data;
+			t->next = NULL;
+			
+			if(isEmpty()){
+					head = t;
+					tail = t;
+			}
+			else{
+				node* k = head;
+				head = t;
+				head->next = k;
+			}
+		}
+		
+		bool isEmpty(){
+			return head == NULL;
+		}
+		void print(){
+			for(node* k = head; k!=NULL;k=k->next){
+				cout << k->data << endl;
+			}
+		}
+		void pop(){
+			if(isEmpty()){
+				cout << "The Stack is Empty nothing to pop"<< endl;
+			}
+			else{
+				node* k = head;
+				head = head->next;
+				k->next = NULL;
+			}
+			
+		}
+		int peek(){
+			return head->data;
+		}
+};
+
+
+int main() {
+
+	StackLinkedList j;
+	j.push(89);
+	j.push(78);
+	j.push(67);
+	j.push(45);
+	j.print();
+	cout << endl;
+	j.pop();
+	j.print();
+	cout<<j.peek()<<endl;
+	
+	
+	return 0;
+}

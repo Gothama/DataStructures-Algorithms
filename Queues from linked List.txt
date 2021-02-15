@@ -1,0 +1,60 @@
+#include <iostream>
+
+
+using namespace std;
+struct node{
+	int data;
+	node* next;
+};
+
+
+class QueuesLinkedList{
+	node* head = NULL;
+	node* tail = NULL;
+	int size = 0;
+	
+	public:
+		void insert(int data){
+			node* t=new node;
+			t->data = data;
+			t->next=NULL;
+			size++;
+			if(head==NULL){
+				head = t;
+				tail =t;
+			}
+			else{
+				tail->next = t;
+				tail = t;
+			}
+		}
+		void remove(){
+			node* j = head;
+			head = head->next;
+			j->next = NULL;
+			size--;
+		}
+		void print(){
+			for(node* k = head; k!=NULL;k=k->next){
+				cout << k->data << endl;
+			}
+		}
+		int getSize(){
+			return size;
+		}
+	
+};
+int main() {
+	
+	
+	QueuesLinkedList l;
+	l.insert(78);
+	l.insert(5);
+	l.insert(34);
+	l.insert(89);
+	l.remove();
+	l.print();
+	cout<<l.getSize()<<endl;
+	
+	return 0;
+}

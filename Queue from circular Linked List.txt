@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+struct node{
+	node* next;
+	int data;
+};
+
+struct QueueCircularLinkedList{
+	node* head = NULL;
+	
+	void push(int data){
+		node* n = new node;
+		n->next = NULL;
+		n->data = data;
+		
+		if(head==NULL){
+			head = n;
+			n->next = head;
+		}
+		else{
+			node* k = head->next;
+			head->next = n;
+			n->next = k;
+		}
+	
+	}
+	void print(){
+		node* j = head;
+		do{
+			cout << j->data << endl;
+			j=j->next;
+		}
+		while(j!=head);
+	}
+	void pop(){ //remove the head node
+		
+		node* h = head;
+		while(h->next!=head){
+			h=h->next;
+		}
+		h->next = head->next;
+		head = head->next;
+	}
+	
+};
+int main(int argc, char** argv) {
+	QueueCircularLinkedList k;
+	k.push(7);
+	k.push(3);
+	k.push(4);
+	k.push(22);
+	k.push(71);
+	k.push(89);
+	k.print();
+	cout << endl;
+	k.pop();
+	k.print();
+	cout << endl;
+	return 0;
+}

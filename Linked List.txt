@@ -1,0 +1,107 @@
+#include <iostream>
+using namespace std;
+
+struct node{
+	node* next;
+	int data;
+};
+
+struct LinkedList{
+	node* head = NULL;
+	node* tail= NULL;
+	int data;
+	
+	void insertFront(int data){
+		node* n = new node;
+		n->data = data;
+		n->next = NULL;
+		
+		if(head==NULL){
+			head = n;
+			tail = n;
+		}
+		else{
+			node* j = head;
+			head = n;
+			n->next = j;
+		}
+	}
+	void print(){
+		for(node* h = head; h!=NULL; h=h->next){
+			cout << h->data << endl;
+		}
+	}
+	void removeFront(){
+		node* h = head->next;
+		head->next = NULL;
+		head =h;	
+	}
+	void removeBack(){
+		node* g = head ;
+		while(g->next->next!=NULL){
+			 g = g->next;
+		}
+		g->next=NULL;
+		tail = g;
+	}
+	void insertBack(int data){
+		node* n = new node;
+		n->data = data;
+		n->next = NULL;
+		
+		tail->next = n;
+		tail = n;
+	}
+		void swap(int d1, int d2){ //this method can be used to swap two numbers which are adjacent and the two numbers are not in the head or tail
+		node* prevnd1 = search(d1);
+		node* prevnd2 = search(d2);
+		if(prevnd1 == prevnd2){
+			cout << "Cant Swap" << endl;
+		}
+		else{
+			node* t = prevnd1->next ;
+			prevnd1->next = prevnd2->next;
+			prevnd2->next=t->next->next;
+			prevnd1->next->next=t;
+		}
+	}
+	node* search(int d){
+		node* m = head;
+		if(head->data==d){
+			return NULL;
+		}
+		while(m->next->next!=NULL){
+			if(m->next->data==d){
+				return m;
+			}
+			m=m->next;
+		}
+		
+	}
+
+};
+int main() {
+	LinkedList k;
+	k.insertFront(7);
+	k.insertFront(3);
+	k.insertFront(4);
+	k.insertFront(22);
+	k.insertFront(71);
+	k.insertFront(89);
+	k.print();
+	cout << endl;
+	k.removeFront();
+	k.print();
+	cout << endl;
+	k.removeBack();
+	k.print();
+	cout << endl;
+	k.insertBack(0);
+	k.print();
+	cout << endl;
+	cout << endl;
+	k.swap(4,3);
+	k.print();
+	cout << endl;
+	return 0;
+}

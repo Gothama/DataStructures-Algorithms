@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+struct node{
+	node* next;
+	int data;
+};
+
+struct CircularLinkedList{
+	node* head = NULL;
+	
+	void insert(int data){
+		node* n = new node;
+		n->next = NULL;
+		n->data = data;
+		
+		if(head==NULL){
+			head = n;
+			n->next = head;
+		}
+		else{
+			node* k = head->next;
+			head->next = n;
+			n->next = k;
+		}
+	
+	}
+	void print(){
+		node* j = head;
+		do{
+			cout << j->data << endl;
+			j=j->next;
+		}
+		while(j!=head);
+	}
+	void removeFront(){ //remove the head node
+		
+		node* h = head;
+		while(h->next!=head){
+			h=h->next;
+		}
+		h->next = head->next;
+		head = head->next;
+	}
+	
+};
+int main(int argc, char** argv) {
+	CircularLinkedList k;
+	k.insert(7);
+	k.insert(3);
+	k.insert(4);
+	k.insert(22);
+	k.insert(71);
+	k.insert(89);
+	k.print();
+	cout << endl;
+	k.removeFront();
+	k.print();
+	cout << endl;
+	return 0;
+}

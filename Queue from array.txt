@@ -1,0 +1,62 @@
+#include <iostream>
+
+
+using namespace std;
+
+struct QueueArray{
+
+		int front= 0,mSize = 4, rear= -1, nItems= 0;
+		int array[4];
+	
+	public:	
+		void insert(int j){
+			if(!isFull()){
+				array[++rear] = j;
+				nItems++;
+			}
+		}
+		void remove(){
+			if(!isEmpty()){
+				int temp = array[front++];
+				nItems--;
+				
+			}
+			
+		}
+		void print(){
+			for(int j= front; j<=rear;j++){
+				cout << array[j] << endl;
+			}
+		}
+		int peekFront(){
+			return array[front];
+		}
+		bool isEmpty(){
+			return nItems == 0;
+		}
+		bool isFull(){
+			return nItems==mSize;
+		}
+		int size(){
+			return nItems;
+		}
+		
+	
+};
+int main() {
+	
+QueueArray l;
+
+	l.insert(78);
+	l.insert(5);
+	l.insert(34);
+	l.insert(89);
+	l.remove();
+	l.print();
+	cout<<endl;
+	l.remove();
+	l.insert(8);
+	l.insert(3);
+	l.print();
+	return 0;
+}

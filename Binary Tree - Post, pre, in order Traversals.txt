@@ -1,0 +1,89 @@
+#include <iostream>
+using namespace std;
+
+struct node{
+	node* left;
+	node* right;
+	int data;
+};
+	
+	node* insert(node* g, int data){
+		node* n = new node;
+		n->data = data;
+		n->left = NULL;
+		n->right = NULL;
+		
+		if(g==NULL){
+			return n;
+		}
+		if(data> g->data){
+			g->right = insert(g->right, data);
+		}
+		else if(data<g->data){
+			g->left = insert(g->left , data);
+		}
+		else if(data==g->data){
+			cout << "There is a duplicate " << data << endl;
+			g->left = insert(g->left,data);
+		}
+		return g;
+	}
+	
+	void display(node *temp)
+	{
+	if(temp==NULL)
+	    return ;
+	display(temp->left); 
+	cout<<temp->data<<" ";
+	display(temp->right);
+	}
+	
+	void inOrder(node* g){
+		if(g==NULL){
+			return ;
+		}
+		else{
+			inOrder(g->left);
+			cout << g->data << " ";
+			inOrder(g->right);
+		}
+	}
+	
+	void postOrder(node* g){
+			if(g==NULL){
+			return ;
+		}
+		else{
+			postOrder(g->left);
+			postOrder(g->right);
+			cout << g->data << " ";	
+		}
+	}
+	
+	void preOrder(node* g){
+		if(g==NULL){
+			return ;
+		}
+		else{
+			cout << g->data << " ";
+			preOrder(g->left);
+			preOrder(g->right);	
+		}
+	}
+	
+int main() {
+	node* root = NULL;
+	root = insert(root , 14);
+	root = insert(root , 12);
+	root = insert(root , 17);
+	root = insert(root , 11);
+	root = insert(root , 15);
+	display(root);
+	cout << endl;
+	inOrder(root);
+	cout <<  endl;
+	postOrder(root);
+	cout <<  endl;
+	preOrder(root);
+	return 0;
+}

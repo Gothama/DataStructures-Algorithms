@@ -1,0 +1,78 @@
+#include <iostream>
+using namespace std;
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+struct node{
+	node* next;
+	node* previous;
+	int data;
+};
+
+struct DoubleLinkedList{
+	node* head = NULL;
+	node* tail = NULL;
+	
+	void insertFront(int data){
+		node* n = new node;
+		n->data = data;
+		n->next = NULL;
+		n->previous = NULL;
+		
+		if(head == NULL){
+			head = n;
+			tail = n;
+		}
+		else{
+			n->next = head;
+			head->previous = n;
+			head = n;
+		}
+	}
+	void print(){
+		for(node* h = head; h!=NULL; h=h->next){
+			cout << h->data << endl;
+		}
+	}
+	void insertBack(int data){
+		node* n = new node;
+		n->data = data;
+		n->next = NULL;
+		n->previous = NULL;
+		
+		tail->next = n;
+		n->previous = tail;
+		tail = n;	
+	}
+	void removeFront(){
+		node* j = head->next;
+		head->next = NULL;
+		j->previous = NULL;
+		head = j;
+	}
+	void removeBack(){
+		tail->previous->next = NULL;
+		tail = tail->previous;
+		tail->next = NULL;
+		
+	}
+};
+int main(int argc, char** argv) {
+	DoubleLinkedList k;
+	k.insertFront(7);
+	k.insertFront(3);
+	k.insertFront(4);
+	k.insertFront(22);
+	k.insertFront(71);
+	k.insertFront(89);
+	k.print();
+	cout << endl;
+	k.removeFront();
+	k.print();
+	cout << endl;
+	k.removeBack();
+	k.print();
+	cout << endl;
+	k.insertBack(0);
+	k.print();
+	cout << endl;
+	return 0;
+}

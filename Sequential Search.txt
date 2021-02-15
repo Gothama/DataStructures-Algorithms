@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int SequentialSearch(int array[], int k, int i , int g){
+	for(int f = i ; f<=g; f++ ){
+		if(array[f]==k){
+			return f;
+		}
+	}
+	return -1;
+}
+int main() {
+	int  array[] = {1,2,3,4,5,6,7,8,9,10};
+	int j = SequentialSearch(array, 8 , 0, 9);
+	if(j==-1){
+		cout << "Number not found" << endl;
+	}
+	else{
+		cout << "Number found and the number is in the " << j << " index of the array" << endl;
+	}
+	return 0;
+}

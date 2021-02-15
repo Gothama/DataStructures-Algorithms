@@ -1,0 +1,65 @@
+#include <iostream>
+
+
+using namespace std;
+
+struct node{
+	node* next;
+	int data;
+};
+
+struct linkedListStack{
+	node* head = NULL;
+	node* tail = NULL;
+	
+	void push(int data){
+		node* n = new node;
+		n->data = data;
+		if(head == NULL){
+			head = n;
+			tail = n;
+		}
+		else{
+			tail->next = n;
+			tail = n;
+			tail->next = NULL;
+		}
+	}
+	void pop(){
+		if(isEmpty()){
+			cout << "Stack is empty" << endl;
+		}
+		else{
+				node* h = head;
+				for( ;h->next->next != NULL; h=h->next){
+			
+				}
+				h->next = NULL;
+				tail=h;
+		}
+	
+	}
+	bool isEmpty(){
+			return head == NULL;
+		}
+	void print(){
+			for(node* k = head; k!=NULL;k=k->next){
+				cout << k->data << endl;
+			}
+		}
+	
+};
+
+int main() {
+linkedListStack l;
+l.push(89);
+l.push(6);
+l.push(0);
+l.push(23);
+l.push(3);
+l.print();
+cout << endl;
+l.pop();
+l.print();	
+	return 0;
+}
